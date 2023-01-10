@@ -138,7 +138,7 @@ void matchTheTrains(int x,int y){
 }
 void printTrain(){
     for(Train train : trains){
-        cout<<"line "<<train.line<<": ["<<train.start<<" , "<<train.end<<"]"<<endl;
+        cout<<"Train "<<train.line+1<<": ["<<train.start+1<<" , "<<train.end+1<<"]"<<endl;
     }
 }
 int main(){
@@ -150,22 +150,36 @@ int main(){
         railnetwork.railNetworkInput(edge.at(0),edge.at(1),edge.at(2));
         railnetwork.railNetworkInput(edge.at(1),edge.at(0),edge.at(2));
     }
-    cout<<"Given the list of metro lines, Select the line one: "<<endl;
+    cout<<"Given the List of Stations: "<<endl;
+    for(int i = 0;i<stationIndexing.size();i++){
+        cout<<i+1<<" "<<stationIndexing[i]<<endl;
+    }
+    cout<<"\nGiven the list of metros: "<<endl;
     for(int i = 0;i < rails.size();i++){
-        cout<<i<<" : ";
+        cout<<i+1<<" : ";
         for(int j = 0;j < rails[i].size();j++){
-            cout<<rails[i][j]<<" ";
+            cout<<rails[i][j]+1<<" ";
         }
         cout<<endl;
     }
-    int x,y;
-    cout<<"Enter the starting and destination Index: ";
-    cin>>x>>y;
-    shortest_path = railnetwork.dijkstra(x,y);
-    matchTheTrains(x,y);
+    string x,y;
+    cout<<"Enter the departure Station Name: ";
+    cin>>x;
+    cout<<"Enter the destination Station Name: ";
+    cin>>y;
+    int x_index,y_index;
+    for(int i = 0;i<stationIndexing.size();i++){
+        if(stationIndexing[i].compare(x)==0) x_index = i;
+        if(stationIndexing[i].compare(y)==0) y_index = i;
+    }
+    shortest_path = railnetwork.dijkstra(x_index,y_index);
+    matchTheTrains(x_index,y_index);
     printTrain();
     // Ticket booking is separate part of the code 
-    cout<<"Generate the Ticket: "<<endl;
+    cout<<"\nGenerate the Ticket for given list of stations: "<<endl;
+    for(int i = 0;i<10;i++){
+        cout<<i+1<<" "<<stationIndexing[i]<<endl;
+    }
     int num_seats = 10;
     int num_stations = 10;
     BookTicket bookticket(num_seats,num_stations);

@@ -73,9 +73,9 @@ class RailNetwork{
             }
             path.push(source);
 
-            cout << "Shortest path from station " << source << " to station " << destination << ":" << endl;
+            cout << "Shortest path from station " << source+1 << " to station " << destination+1 << ":" << endl;
             while (!path.empty()) {
-                cout<<path.top() << " ";
+                cout<<path.top()+1<< " ";
                 seats.push_back(path.top());
                 path.pop();
             }
